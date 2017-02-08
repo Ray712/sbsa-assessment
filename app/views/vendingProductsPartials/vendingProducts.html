@@ -1,0 +1,33 @@
+<div class="container">
+  <h1>UnHealthy Food Machine</h1>
+  <form name="myForm">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Item Code</th>
+        <th>name</th>
+        <th class="leftPadding2em">price</th>
+        <th class="leftPadding2em">quantity</th>
+      </tr>
+      </thead>
+      <tbody ng-repeat="product in vendCtrl.products">
+      <td>{{product.id}}</td>
+      <td class="leftPadding8em">{{product.name}}</td>
+      <td class="leftPadding2em">{{product.price}}</td>
+      <td class="leftPadding2em">{{product.stock}}</td>
+    </table>
+  </form>
+</div>
+
+<p>The machine can only accept 50 cent, R 1, R 2,
+  or R 5</p>
+
+<input type="number" placeholder="INSERT COINS" ng-change="vendCtrl.getAmount(vendCtrl.amount)"
+       ng-model="vendCtrl.amount" required>  Total amount inserted <span id="currency-default">{{vendCtrl.totalAmount | currency : "R" : 2}}</span></input>
+<div ng-show="vendCtrl.message">{{vendCtrl.message}}</div>
+
+<div ng-show="vendCtrl.amount !== undefined && vendCtrl.message === undefined" class="topPadding1em">
+  <input type="number" ng-model="vendCtrl.itemCode" required>Item Code</input>
+  <button class="btn btn-primary" type="button" ng-click="vendCtrl.buyItem(vendCtrl.itemCode)">Confirm</button>
+  <span us-spinner="{radius:30, width:8, length: 16}" spinner-on="showSpinner"></span>
+</div>

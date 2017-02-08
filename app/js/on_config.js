@@ -13,10 +13,18 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
   $stateProvider
   .state('Home', {
     url: '/',
-    controller: 'ExampleCtrl as home',
-    templateUrl: 'home.html',
+    controller: 'VendingProductsCtrl as vendCtrl',
+    templateUrl: 'vendingProductsPartials/vendingProducts.html',
     title: 'Home'
   });
+
+  // $stateProvider
+  // .state('Home', {
+  //   url: '/',
+  //   controller: 'ExampleCtrl as home',
+  //   templateUrl: 'home.html',
+  //   title: 'Home'
+  // });
 
   $urlRouterProvider.otherwise('/');
 

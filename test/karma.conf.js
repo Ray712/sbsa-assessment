@@ -37,8 +37,17 @@ const karmaBaseConfig = {
   proxies: {
     '/': 'http://localhost:9876/'
   },
-
+  colors: true,
   urlRoot: '/__karma__/',
+
+  coverageReporter: {
+    sourceStore: require('istanbul').Store.create('fslookup'),
+    reporters: [
+      {'type': 'text'},//to display table with line not tested
+//                {'type': 'html'},
+      {'type': 'html', dir: 'coverage'}
+    ]
+  },
 
   files: [
     // app-specific code

@@ -23,12 +23,18 @@ body {
   background-color: #AD3352;
 }
 
-.leftPadding8em{
-  padding-left: 8em;
-}
-.leftPadding2em{
-  padding-left: 2em;
-}
+
 .topPadding1em{
   padding-top: 1em;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 4px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }

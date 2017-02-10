@@ -1,7 +1,7 @@
 import angular from 'angular';
 
 const bulk = require('bulk-require');
-const factoryModule = angular.module('app.services', []);
+const servicesModule = angular.module('app.services', []);
 const services = bulk(__dirname, ['./**/!(*index|*.spec).js']);
 
 function declare(serviceMap) {
@@ -13,7 +13,7 @@ function declare(serviceMap) {
     }
 
     if (item.fn && typeof item.fn === 'function') {
-      factoryModule.service(item.name, item.fn);
+      servicesModule.service(item.name, item.fn);
     } else {
       declare(item);
     }
@@ -22,16 +22,4 @@ function declare(serviceMap) {
 
 declare(services);
 
-export default factoryModule;
-
-
-//
-//
-// 'use strict';
-//
-// var angular = require('angular');
-// var bulk = require('bulk-require');
-//
-// module.exports = angular.module('app.common.cacheFactory.applicationCacheFactory', []);
-//
-// bulk(__dirname, ['./**/!(*_index|*.spec).js']);
+export default servicesModule;

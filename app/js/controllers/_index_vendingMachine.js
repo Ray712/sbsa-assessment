@@ -1,7 +1,7 @@
 import angular from 'angular';
 
 const bulk = require('bulk-require');
-const controllersModule = angular.module('app.controllers', []);
+const controllersModule = angular.module('app.controllers', ['ui.bootstrap']);
 const controllers = bulk(__dirname, ['./**/!(*index|*.spec).js']);
 
 function declare(controllerMap) {

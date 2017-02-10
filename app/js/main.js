@@ -1,3 +1,5 @@
+
+// import '../../node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css';
 import angular from 'angular';
 
 // angular modules
@@ -6,31 +8,22 @@ import onConfig  from './on_config';
 import onRun     from './on_run';
 
 import 'angular-ui-router';
-import 'angular-ui-bootstrap';
 import 'lodash';
 import 'angular-spinner';
+import 'angular-ui-bootstrap';
 import './templates';
-// import './filters';
-// import './controllers';
 import './controllers/_index_vendingMachine';
 import './services';
 import './services/_index_productsFactory';
-// import './factory';
-// import './directives';
 
 // create and bootstrap application
 const requires = [
   'ui.router',
-  'templates',
-  // 'app.filters',
   'ui.bootstrap',
+  'templates',
   'angularSpinner',
-  // 'app.controllers.vendingMachine',
   'app.controllers',
-  'app.services',
-  // 'app.services.productsFactory'
-  // 'app.factory',
-  // 'app.directives'
+  'app.services'
 ];
 
 // mount on window for testing

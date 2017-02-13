@@ -68,8 +68,6 @@ describe('Unit: VendingProductsCtrl', function () {
       ctrl.getAmount(5);
       expect(ctrl.totalAmount).toEqual(5);
       expect(ctrl.buyItem).toBeDefined();
-      // console.log('e '+cacheService.getData('amount'));
-
     });
 
     it('should find the selected item id with zero stock', () => {
@@ -83,8 +81,6 @@ describe('Unit: VendingProductsCtrl', function () {
       ctrl.getAmount(5);
       expect(ctrl.totalAmount).toEqual(5);
       expect(ctrl.buyItem).toBeDefined();
-      // console.log('e '+cacheService.getData('amount'));
-
     });
 
     it('should be able to buy the item selected ', () => {

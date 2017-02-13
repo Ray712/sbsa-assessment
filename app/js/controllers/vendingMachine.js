@@ -13,7 +13,6 @@ function VendingProductsCtrl(ProductsFactory, ProductService, $timeout) {
   // $timeout(callAtTimeout, 6000);
 
   function callAtTimeout() {
-    console.log("Timeout occurred");
     vm.showSpinner = false;
   }
 

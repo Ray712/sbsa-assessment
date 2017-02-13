@@ -1,34 +1,15 @@
-    function ProductService($rootScope, $window) {
+    function ProductService( $window) {
   'ngInject';
 
-
-  // return {
-  //     setProd: function(key, value) {
-  //       $window.localStorage[key] = value;
-  //     },
-  //     get: function(key, defaultValue) {
-  //       return $window.localStorage[key] || defaultValue;
-  //     },
-  //     setObject: function(key, value) {
-  //       $window.localStorage[key] = JSON.stringify(value);
-  //     },
-  //     getObject: function(key) {
-  //       return JSON.parse($window.localStorage[key] || '{}');
-  //     }
-  //   };
-
     return {
-      setData: function(val) {
-        $window.localStorage && $window.localStorage.setItem('storage', JSON.stringify(val));
-        // console.log('storage in a service ' + " is now " + JSON.stringify(val[1]));
+      setData: function(store,val) {
+        $window.localStorage && $window.localStorage.setItem(store, JSON.stringify(val));
         return this;
       },
-      getData: function() {
-        return $window.localStorage && $window.localStorage.getItem('storage');
+      getData: function(store) {
+        return $window.localStorage && $window.localStorage.getItem(store);
       }
     };
-
-
 }
 
 export default {

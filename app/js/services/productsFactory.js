@@ -12,8 +12,6 @@ function ProductsFactory() {
   instanceArray.push({'id':8,'name':'Fritos','price':'5.00','stock':0});
   instanceArray.push({'id':9,'name':'Big Corn Bites','price':'5.00','stock':2});
   instanceArray.push({'id':10,'name':'Water','price':'4.00','stock':0});
-  // instanceArray.push(product [{'id':1,'name':'Simba Salt and Vinegar','price':'5.00','stock':10}]);
-  //
 
 
   const service = {};
@@ -22,11 +20,6 @@ function ProductsFactory() {
     return instanceArray[id];
 };
 
-  service.getDenominations = function () {
-        let denominations = [];
-        denominations.push({'amount': 50,'amount': 1,'amount':2, 'amount': 5});
-        return denominations;
-  };
 
   service.getAllProducts = function () {
     return instanceArray;

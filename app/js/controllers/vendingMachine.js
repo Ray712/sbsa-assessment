@@ -10,7 +10,6 @@ function VendingProductsCtrl(ProductsFactory, ProductService, $timeout) {
   vm.validDenom = [0.50, 1, 2, 5];
   vm.totalAmount = 0;
 
-  // $timeout(callAtTimeout, 6000);
 
   function callAtTimeout() {
     vm.showSpinner = false;
@@ -31,6 +30,7 @@ function VendingProductsCtrl(ProductsFactory, ProductService, $timeout) {
   vm.denominations = ProductsFactory.getDenominations();
 
   vm.validateItem = function (itemId) {
+    vm.itemCode = itemId;
     if (itemId > 10 || itemId < 1) {
       vm.invalidItemCode = 'Invalid Item Code entered';
     } else {
@@ -61,8 +61,7 @@ function VendingProductsCtrl(ProductsFactory, ProductService, $timeout) {
         }
       }
     } else {
-      vm.itemCode = vm.itemCode + 1;
-      vm.itemMessage = 'Insufficient Amount for Item number ' + vm.itemCode;
+      vm.itemMessage = 'Insufficient Amount for Item name ' + vm.selectedItem.name;
     }
   };
 
@@ -81,7 +80,7 @@ function VendingProductsCtrl(ProductsFactory, ProductService, $timeout) {
 
   vm.refreshAllItem = function () {
     vm.showSpinner = true;
-    $timeout(callAtTimeout, 6000);
+    $timeout(callAtTimeout, 3000);
     vm.allProducts = ProductsFactory.getAllProducts();
     vm.products = vm.storage;
   };

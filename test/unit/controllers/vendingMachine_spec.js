@@ -1,15 +1,16 @@
 describe('Unit: VendingProductsCtrl', function () {
 
-  let ctrl, product, cacheService;
+  let ctrl, product, cacheService, timeout;
 
   beforeEach(function () {
     // instantiate the app module
     angular.mock.module('app');
 
-    angular.mock.inject(($controller, ProductsFactory, ProductService) => {
+    angular.mock.inject(($controller, ProductsFactory, ProductService, $timeout) => {
       ctrl = $controller('VendingProductsCtrl');
       product = ProductsFactory;
       cacheService = ProductService;
+      timeout = $timeout;
     });
   });
 
@@ -34,7 +35,9 @@ describe('Unit: VendingProductsCtrl', function () {
   it('should have the validate item code', function () {
     expect(ctrl.validateItem).toBeDefined();
     ctrl.validateItem(2);
-    expect(ctrl.itemCode).toBeUndefined();
+    expect(ctrl.invalidItemCode).toBeUndefined();
+    ctrl.validateItem(0);
+    expect(ctrl.invalidItemCode).toBe('Invalid Item Code entered');
   });
 
   it('should not have the correct item code ', () => {
@@ -130,6 +133,23 @@ describe('Unit: VendingProductsCtrl', function () {
       ctrl.refreshAllItem();
       item = ctrl.selectedItem = product.getProduct(9);
       expect(item.stock).toEqual(0);
+    });
+  });
+
+  describe('Spinner ', () => {
+
+    it('should start spinner when refreshing products ', () => {
+      function callAtTimeout () {
+        ctrl.showSpinner = false;
+      }
+      let item = {'id': 10, 'name': 'Water', 'price': '4.00', 'stock': 2};
+      expect(item.stock).toEqual(2);
+      ctrl.refreshAllItem();
+      item = ctrl.selectedItem = product.getProduct(9);
+      expect(item.stock).toEqual(0);
+      expect(callAtTimeout).toBeDefined();
+      callAtTimeout();
+      timeout(callAtTimeout, 2000);
     });
   });
 

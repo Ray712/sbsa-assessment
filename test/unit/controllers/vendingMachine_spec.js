@@ -32,12 +32,19 @@ describe('Unit: VendingProductsCtrl', function () {
   });
 
 
-  it('should have the validate item code', function () {
+  it('should have the correct validate item code', function () {
+    let product = {'id': 10, 'name': 'Water', 'price': '4.00', 'stock': 2};
     expect(ctrl.validateItem).toBeDefined();
     ctrl.validateItem(2);
     expect(ctrl.invalidItemCode).toBeUndefined();
+    expect(ctrl.buyItem).toBeDefined();
+    ctrl.buyItem(product);
+  });
+
+  it('should have the incorrect validate item code', function () {
     ctrl.validateItem(0);
     expect(ctrl.invalidItemCode).toBe('Invalid Item Code entered');
+
   });
 
   it('should not have the correct item code ', () => {
@@ -74,12 +81,12 @@ describe('Unit: VendingProductsCtrl', function () {
     });
 
     it('should find the selected item id with zero stock', () => {
-      ctrl.selectedItem = {'id':10,'name':'Water','price':'4.00','stock':0};
+      ctrl.selectedItem = {'id': 10, 'name': 'Water', 'price': '4.00', 'stock': 0};
       expect(product.getAllProducts).toBeDefined();
       expect(ctrl.allProducts).toBeUndefined();
 
       expect(ctrl.selectedItem).toBeDefined();
-      ctrl.allProducts = {'id':10,'name':'Water','price':'4.00','stock':0};
+      ctrl.allProducts = {'id': 10, 'name': 'Water', 'price': '4.00', 'stock': 0};
       expect(ctrl.allProducts.id).toEqual(10);
       ctrl.getAmount(5);
       expect(ctrl.totalAmount).toEqual(5);
@@ -139,9 +146,10 @@ describe('Unit: VendingProductsCtrl', function () {
   describe('Spinner ', () => {
 
     it('should start spinner when refreshing products ', () => {
-      function callAtTimeout () {
+      function callAtTimeout() {
         ctrl.showSpinner = false;
       }
+
       let item = {'id': 10, 'name': 'Water', 'price': '4.00', 'stock': 2};
       expect(item.stock).toEqual(2);
       ctrl.refreshAllItem();

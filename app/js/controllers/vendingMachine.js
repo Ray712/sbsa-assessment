@@ -32,7 +32,6 @@ function VendingProductsCtrl(ProductsFactory, ProductService, $timeout) {
     if (itemId > 10 || itemId < 1) {
       vm.invalidItemCode = 'Invalid Item Code entered';
     } else {
-      // vm.itemCode = itemId - 1;
       vm.buyItem(ProductsFactory.getProduct(itemId - 1));
     }
   };

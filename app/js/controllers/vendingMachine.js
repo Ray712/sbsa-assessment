@@ -49,6 +49,7 @@ function VendingProductsCtrl(ProductsFactory, ProductService, $timeout) {
           let price = vm.allProducts[i].price;
           stock = stock - 1;
           vm.totalAmount = vm.totalAmount - price;
+          ProductService.setData('amount', vm.totalAmount);
           vm.allProducts[i].stock = stock;
           vm.itemMessage = vm.moneyReturned = undefined;
         } else if(vm.selectedItem.id === vm.allProducts[i].id && vm.allProducts[i].stock === 0){

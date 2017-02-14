@@ -24,27 +24,51 @@ describe('Unit: VendingProductsCtrl', function () {
     expect(ctrl.amount).toBeUndefined();
   });
 
-  it('should have the VendingProductsCtrl function variables defined', function () {
-    expect(ctrl.message).toBeUndefined();
-    expect(ctrl.validDenom[2]).toEqual(2);
-    ctrl.getAmount(5);
-    expect(ctrl.amount).toEqual(null);
-  });
-
-
-  it('should have the correct validate item code', function () {
-    let product = {'id': 10, 'name': 'Water', 'price': '4.00', 'stock': 2};
+  it('should have the correct validate item code and not enough product ', function () {
+    let product = {'id': 5, 'name': 'Water', 'price': '4.00', 'stock': 0};
     expect(ctrl.validateItem).toBeDefined();
-    ctrl.validateItem(2);
+    ctrl.validateItem(4);
     expect(ctrl.invalidItemCode).toBeUndefined();
     expect(ctrl.buyItem).toBeDefined();
     ctrl.buyItem(product);
   });
 
+  it('should have the correct validate item code and not enough product ', function () {
+    let product = {'id': 9, 'name': 'Water', 'price': '4.00', 'stock': 2};
+    expect(ctrl.validateItem).toBeDefined();
+    ctrl.validateItem(9);
+    expect(ctrl.invalidItemCode).toBeUndefined();
+    expect(ctrl.buyItem).toBeDefined();
+    ctrl.buyItem(product);
+  });
+
+  it('should have the correct validate item code and but item', function () {
+    let productItem = {'id': 6, 'name': 'Water', 'price': '4.00', 'stock': 1};
+    cacheService.setData('amount', 5);
+    expect(cacheService.getData('amount')).toEqual('5');
+    ctrl.totalAmount = parseInt(cacheService.getData('amount'));
+    expect(ctrl.validateItem).toBeDefined();
+    ctrl.validateItem(4);
+    expect(ctrl.invalidItemCode).toBeUndefined();
+    expect(ctrl.buyItem).toBeDefined();
+    ctrl.buyItem(productItem);
+  });
+
+  it('should have the correct validate item code and but item', function () {
+    let productItem = {'id': 8, 'name': 'Water', 'price': '4.00', 'stock': 0};
+    cacheService.setData('amount', 5);
+    expect(cacheService.getData('amount')).toEqual('5');
+    ctrl.totalAmount = parseInt(cacheService.getData('amount'));
+    expect(ctrl.validateItem).toBeDefined();
+    ctrl.validateItem(4);
+    expect(ctrl.invalidItemCode).toBeUndefined();
+    expect(ctrl.buyItem).toBeDefined();
+    ctrl.buyItem(productItem);
+  });
+
   it('should have the incorrect validate item code', function () {
     ctrl.validateItem(0);
     expect(ctrl.invalidItemCode).toBe('Invalid Item Code entered');
-
   });
 
   it('should not have the correct item code ', () => {
@@ -68,12 +92,10 @@ describe('Unit: VendingProductsCtrl', function () {
 
   describe('item purchase ', () => {
     it('should find the selected item id ', () => {
-      let itemId = 1;
-      expect(itemId).toEqual(1);
+      let itemId = 10;
+      expect(itemId).toEqual(10);
       expect(product.getAllProducts).toBeDefined();
-      let selectedProduct = product.getProduct(1);
-      expect(selectedProduct.id).toEqual(2);
-      selectedProduct = product.getProduct(9);
+      let selectedProduct = product.getProduct(9);
       expect(selectedProduct.id).toEqual(10);
       ctrl.getAmount(5);
       expect(ctrl.totalAmount).toEqual(5);
@@ -81,7 +103,7 @@ describe('Unit: VendingProductsCtrl', function () {
     });
 
     it('should find the selected item id with zero stock', () => {
-      ctrl.selectedItem = {'id': 10, 'name': 'Water', 'price': '4.00', 'stock': 0};
+      ctrl.selectedItem = {'id': 10, 'name': 'Water', 'price': '4.00', 'stock': 1};
       expect(product.getAllProducts).toBeDefined();
       expect(ctrl.allProducts).toBeUndefined();
 
@@ -114,13 +136,13 @@ describe('Unit: VendingProductsCtrl', function () {
 
     it('should have insufficient money to buy the item selected ', () => {
       ctrl.getAmount(1);
-      ctrl.selectedItem = product.getProduct(1);
+      ctrl.selectedItem = product.getProduct(4);
       expect(ctrl.selectedItem).toBeDefined();
       expect(ctrl.amount).toEqual(null);
       expect(ctrl.totalAmount).toEqual(1);
       expect(ctrl.message).toBeUndefined();
       expect(ctrl.moneyReturned).toBeUndefined();
-      expect(ctrl.selectedItem.price).toEqual('5.00');
+      expect(ctrl.selectedItem.price).toEqual('8.00');
       expect(ctrl.amount).toBeLessThan(parseInt(ctrl.selectedItem.price));
     });
 

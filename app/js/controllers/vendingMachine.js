@@ -27,8 +27,6 @@ function VendingProductsCtrl(ProductsFactory, ProductService, $timeout) {
 
   vm.product = ProductsFactory.getProduct();
 
-  vm.denominations = ProductsFactory.getDenominations();
-
   vm.validateItem = function (itemId) {
     vm.itemCode = itemId;
     if (itemId > 10 || itemId < 1) {

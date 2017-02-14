@@ -55,6 +55,7 @@ function VendingProductsCtrl(ProductsFactory, ProductService, $timeout) {
           vm.returnedAmount = vm.totalAmount;
            vm.totalAmount = 0;
           vm.moneyReturned = ' Item not available, amount returned ' + vm.returnedAmount;
+          ProductService.setData('amount', null);
         }
       }
     } else {
